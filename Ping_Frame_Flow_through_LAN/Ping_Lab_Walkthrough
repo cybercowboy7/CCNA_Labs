@@ -1,0 +1,27 @@
+- First, I edited my filters for simulation mode in packet tracer to only show DHCP, DNS, ARP, and ICMP.
+
+- I then sent a ping from PC1 to PC3 and followed the flow of the frame
+
+- Here are the steps the frame took through the LAN:
+  - ARP request Frame with Destination MAC of PC3 and Source MAC of PC1 is sent to SW1
+  - SW1 updates its MAC address table with the source MAC address (PC1 MAC address) coming from interface F0/1
+  - Since SW1 does not have the destination MAC address of PC3 in its MAC address table it sends an ARP flood out all interfaces except the one it recieved the frame from
+  - PC2, and SW2 will receive the ARP flood frame
+  - PC2 drops the frame since the destination does not match its own MAC address
+  - SW2 will look at the frame and update its MAC address with the source MAC address of PC1 and the interface that it came through (G0/1)
+  - Since SW2 does not have the destination MAC address in its MAC table, it then sends ARP flood out all interfaces except for G0/1
+  - PC3 and PC4 receive the frame
+  - PC4 drops the frame
+  - Since PC3's MAC address matches the destination MAC address of the ARP request, it sends known unicast ARP reply back to PC1
+  - Once PC1 receives the ARP reply, it de-encapsulates the frame and begins sending ICMP traffic to PC3 back and forth.
+  - I then continued to generate pings from PC1 and PC2 until both SW1 and SW2 have learned all MAC address of all devices.
+
+!! Here are show commands to verify MAC address table values !!
+
+SW1# show mac address-table
+
+!! Here is the IOS command to clear dynamic MAC address table !!
+
+SW1# clear mac address-table
+
+!!
