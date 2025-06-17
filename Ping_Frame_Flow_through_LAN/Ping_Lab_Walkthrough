@@ -23,7 +23,7 @@ SW1# show mac address-table
 
 !! Here is the IOS command to clear dynamic MAC address table !!
 
-SW1# clear mac address-table
+SW1# clear mac address-table dynamic
 
 !! Can also specify specific interface to clear from MAC address table !!
 
