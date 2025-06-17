@@ -25,4 +25,8 @@ SW1# show mac address-table
 
 SW1# clear mac address-table
 
-!!
+!! Can also specify specific interface to clear from MAC address table !!
+
+SW1# clear mac address-table dynamic interface <interface>
+
+!! end !!
