@@ -6,7 +6,7 @@
 - Here are the steps the frame took through the LAN:
   - ARP request Frame (Layer 2 Broadcast) with Destination MAC: FF:FF:FF:FF:FF:FF and Source MAC of PC1 is sent to SW1
   - SW1 updates its MAC address table with the source MAC address (PC1 MAC address) coming from interface F0/1
-  - Since SW1 does not have the destination MAC address of PC3 in its MAC address table it floods the frame out all interfaces except the one it recieved the frame from
+  - Since SW1 receives layer 2 broadcast frame, it floods the frame out all interfaces except the one it recieved the frame from
   - PC2, and SW2 will receive the flooded frame
   - PC2 drops the frame since the destination does not match its own MAC address
   - SW2 will look at the frame and update its MAC address with the source MAC address of PC1 and the interface that it came through (G0/1)
