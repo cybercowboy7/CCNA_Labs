@@ -1,4 +1,4 @@
-R1:
+R1/SW1:
 
 enable
 config t
@@ -8,3 +8,17 @@ exit
 show run
 !! Verify that the password is showing in cleartext since enable password stores in cleartext !!
 !! Do the same thing for the switch as well !!
+
+!! In order to encrypt the cleartext enable password, we can utilize service password-encryption command !!
+
+config t
+service password-encryption
+
+!! This will ensure that current passwords and all future passwords will be encrypted using cisco's proprietary encrytion alg. (not secure) !!
+
+!! To set a more secure encryption type utilize enable secret PASSWORD. This will take precedence over enable password if already set. utilizes MD5 hashing !!
+
+config t
+enable secret PASSWORD
+
+
