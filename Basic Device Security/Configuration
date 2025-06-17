@@ -1,0 +1,10 @@
+R1:
+
+enable
+config t
+hostname R1
+enable password PASSWORD
+exit
+show run
+!! Verify that the password is showing in cleartext since enable password stores in cleartext !!
+!! Do the same thing for the switch as well !!
