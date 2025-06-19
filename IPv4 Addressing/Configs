@@ -1,0 +1,25 @@
+!! Configure R1 hostname !!
+
+router> en
+router# config t
+router(config) hostname R1
+
+!! Use a show command to show the routers interfaces, IP addresses, status etc. !!
+
+router> en
+router# show ip int brief
+
+!! Configure the appropriate IP addresses on R1 interfaces and enable the interfaces. Include descriptions. !!
+
+router> en
+router# config t
+router(config) int <INT NAME>
+router(config-if) ip address x.x.x.x x.x.x.x
+router(config-if) description <DESCRIPTION>
+router(config-if) no shut
+
+!! View the running config before saving !! 
+
+router> en
+router# show run
+router# wr mem
