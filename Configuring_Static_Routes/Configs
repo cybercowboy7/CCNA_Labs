@@ -1,0 +1,24 @@
+!! Configure hostnames, descriptions and IP addresses for all Routers (Also configure PCs) !!
+
+R1# config t
+R1(config) hostname R1
+R1(config) interface g0/1
+R1(config-if) ip address 192.168.1.254 255.255.255.0
+R1(config-if) description ## Link to SW1 ##
+R1(config-if) no shut
+R1(config-if) interface g0/0
+R1(config-if) ip address 192.168.12.1 255.255.255.0
+R1(config-if) description ## Link to R2 ##
+R1(config-if) no shut
+R1(config-if) end
+R1# wr mem
+
+REPEAT for all other routers
+
+!! Configure static routes to allow PC1 and PC2 to communicate !!
+
+R1(config) ip route 192.168.13.0 255.255.255.0 192.168.12.2
+
+(continue to configure until there are routes to and from each network on each router)
+
+!! test connectivity to ensure PC1 can talk with PC2 !!
