@@ -1,0 +1,23 @@
+A: Source/Destination MAC at PC1 --> SW1 segment 
+   Source == PC1 MAC address
+   Destination == Layer 2 broadcast MAC (FFFF.FFFF.FFFF)
+
+B: Source/Destination MAC at SW1 --> R1 segment
+   Source == PC1
+   Destination == FFFF.FFFF.FFFF
+
+C: Source/Destination MAC at R1 --> R2 segment
+   Source == R1 G0/1 interface
+   Destination == R2 G0/0 interface
+
+D: Source/Destination MAC at R2 --> R3 segment
+   Source == R2 G0/1 interface
+   Destination == R3 G0/0 interface
+
+E: Source/Destination MAC at R3 --> SW2 segment
+   Source == R3 G0/1 interface
+   Destination == FFFF.FFFF.FFFF
+
+F: Source/Destination MAC at SW2 --> PC4 segment
+   Source == R3 G0/1 interface
+   Destination == FFFF.FFFF.FFFF
