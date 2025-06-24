@@ -1,0 +1,57 @@
+Network 192.168.5.0/24 :: Utilizing VLSM
+
+LAN 1: Requires 45 Hosts
+
+LAN 2: Requires 64 Hosts
+
+LAN 3: Requires 14 Hosts
+
+LAN 4: Requires 9 Hosts
+
+!! LAN 2 requires the mosts hosts, so we must assign the largest subnet the beginning of the address space !!
+
+LAN 2 Subnet:
+
+Network Address: 192.168.5.0/25
+Broadcast Address: 192.168.5.127/25
+Usable Addresses: 192.168.5.1 - 192.168.5.126
+
+!! LAN 1 requires the most hosts next, so we must assign the next addresses in the space to this subnet !!
+
+LAN 1 Subnet:
+
+Network Address: 192.168.5.128/26
+Broadcast Address: 192.168.5.191/26
+Usable Addresses: 192.168.5.129 - 192.168.5.190
+
+!! LAN 3 requires the most hosts next, so we must assign the next addresses in the space to this subnet !!
+
+LAN 3 Subnet:
+
+Network Address: 192.168.5.192/28
+Broadcast Address: 192.168.5.207/28
+Usable Addresses: 192.168.5.193 - 192.168.5.206
+
+!! LAN 4 is our smallest subnet so it will go last (As far as the LANs are concerned)!!
+
+LAN 4 Subnet:
+
+Network Address: 192.168.5.208/28
+Broadcast Address: 192.168.5.223/28
+Usable Addresses: 192.168.5.209 - 192.168.5.222
+
+!! Our Final Addresses will be the Point to Point link between R1 and R2 !!
+
+Network Address: 192.168.5.224/30
+Broadcast Address: 192.168.5.227/30
+Usable Addresses: 192.168.5.225 - 192.168.5.226
+
+
+
+
+
+
+
+
+
+
