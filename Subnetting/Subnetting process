@@ -47,6 +47,15 @@ Broadcast Address: 192.168.5.227/30
 Usable Addresses: 192.168.5.225 - 192.168.5.226
 
 
+!! Once All LANs are subnetted, configure the PCs in each subnet with the first usable IP and the Router interface in that LAN with the last usable IP !!
+!! Once complete, add static routes on R1 and R2 to ensure all PCs in each LAN can communicate with one another !!
+
+R1(config) ip route 192.168.5.192 255.255.255.240 192.168.5.226
+R1(config) ip route 192.168.5.208 255.255.255.240 192.168.5.226
+
+R2(config) ip route 192.168.5.0 255.255.255.128 192.168.5.225
+R2(config) ip route 192.168.5.128 255.255.255.192 192.168.5.225
+
 
 
 
