@@ -1,0 +1,8 @@
+!! Replace the ROAS configuration on R1-SW2 with a point-to-point Layer 3 connection. !!
+
+
+
+
+
+
+!! Configure a default route on SW2, with R1's G0/0 interface as the next hop. !!
