@@ -1,8 +1,30 @@
 !! Replace the ROAS configuration on R1-SW2 with a point-to-point Layer 3 connection. !!
 
+R1(config) no interface g0/0.10
+R1(config) no interface g0/0.20
+R1(config) no interface g0/0.30
+R1(config) interface g0/0
+R1(config-if) ip address 10.0.0.194 255.255.255.192
+R1(config-if) no shut
 
-
-
-
+SW2(config) default interface g1/0/2
+SW2(config) interface g1/0/2
+SW2(config-if) no switchport
+SW2(config) ip routing
+SW2(config) interface g1/0/2
+SW2(config-if) ip address 10.0.0.193 255.255.255.252
 
 !! Configure a default route on SW2, with R1's G0/0 interface as the next hop. !!
+
+SW2(config-if) ip route 0.0.0.0 0.0.0.0 10.0.0.194
+
+!! Configure SVIs on SW2, one for each VLAN !!
+
+SW2(config-if) interface vlan 10
+SW2(config-if) ip address 10.0.0.62 255.255.255.192
+SW2(config-if) interface vlan 20
+SW2(config-if) ip address 10.0.0.126 255.255.255.192
+SW2(config-if) interface vlan 30
+SW2(config-if) ip address 10.0.0.190 255.255.255.192
+
+!! Test connectivity between VLANs and the Internet (1.1.1.1) !!
