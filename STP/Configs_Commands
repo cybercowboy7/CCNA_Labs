@@ -26,8 +26,29 @@ SW2# show spanning-tree detail
 !! COnfigure SW2 and the primary root for VLAN2 and the secondary root for VLAN1.!!
 !! What is the STP role/state of each port on each switch now? !!
 
+SW1(config) spanning-tree vlan 1 root primary
+SW1(config) spanning-tree vlan 2 root secondary
+
+SW2(config) spanning-tree vlan 2 root primary
+SW2(config) spanning-tree vlan 1 root secondary
 
 
+  - SW2: 
+      F0/1: Designated Forwarding (VLAN1), Designated Forwarding (VLAN2)
+      F0/2: Designated Forwarding (VLAN1), Designated Forwarding (VLAN2)
+      F0/3: Root Forwarding (VLAN1), Designated Forwarding (VLAN2)
+  - SW3:
+      F0/1: Root Forwarding (VLAN1), Alternate Blocking (VLAN2) 
+      F0/2: Alternate Blocking (VLAN1), Root Forwarding (VLAN2)
+      F0/3: Designated Forwarding (VLAN1), ------ (VLAN2)
+  - SW4:
+      F0/1: Alternate Blocking (VLAN1), Root Forwading (VLAN2)
+      F0/2: Root Forwarding (VLAN1), Alternate Blocking (VLAN2) 
+      F0/3: ------ (VLAN1), Designated Forwarding (VLAN2)
+  - SW1:
+      F0/1: Designated Forwarding (VLAN1), Designated Forwarding (VLAN2)
+      F0/2: Designated Forwarding (VLAN1), Designated Forwarding (VLAN2)
+      F0/3: Designated Forwarding (VLAN1), Root Forwarding (VLAN2)
 
 
 
