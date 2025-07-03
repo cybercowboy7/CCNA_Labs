@@ -1,2 +1,74 @@
 !! Use the CLI to check the current STP topology. What is the current root bridge? What is the STP role/state of each port on each switch? !!
 
+SW2# show spanning-tree detail
+
+### From the output of this command, we see that SW2 is the root of the Spanning tree ###
+### Roles/States of each port on each switch ###
+
+  - SW2:
+      F0/1: Designated Forwarding 
+      F0/2: Designated Forwarding
+      F0/3: Designated Forwarding
+  - SW3:
+      F0/1: Designated Forwarding
+      F0/2: Root Forwarding
+      F0/3: Designated Forwarding
+  - SW4:
+      F0/1: Root Forwarding
+      F0/2: Alternate Blocking
+      F0/3: Designated Forwarding
+  - SW1:
+      F0/1: Alternate Blocking
+      F0/2: Designated Forwarding
+      F0/3: Root Forwarding
+
+!! Configure SW1 as the primary root for VLAN1 and the secondary root for VLAN2. !!
+!! COnfigure SW2 and the primary root for VLAN2 and the secondary root for VLAN1.!!
+!! What is the STP role/state of each port on each switch now? !!
+
+
+
+
+
+
+
+
+
+!! Increase the VLAN1 cost of SW4s F0/2 interface to 100. Does this SW4 select a different root port? !!
+
+
+
+
+
+
+
+
+
+!! Increase the VLAN 1 port priority of SW1s F0/1 to 240. Does SW3 select a different root port? !!
+
+
+
+
+
+
+
+
+
+
+
+!! Configure PortFast and BPDU guard on the F0/3 interfaces of SW3/SW4 !!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
