@@ -55,11 +55,11 @@ SW2(config) spanning-tree vlan 1 root secondary
 
 
 
-!! Increase the VLAN1 cost of SW4s F0/2 interface to 100. Does this SW4 select a different root port? !!
+!! Increase the VLAN1 cost of SW4s F0/2 interface to 100. Does SW4 select a different root port? !!
 
+SW4(config-if) spanning-tree vlan 1 cost 100
 
-
-
+### The switch selects interface f0/1 as the root port because it has a lower cost. ###
 
 
 
@@ -68,16 +68,21 @@ SW2(config) spanning-tree vlan 1 root secondary
 !! Increase the VLAN 1 port priority of SW1s F0/1 to 240. Does SW3 select a different root port? !!
 
 
+SW1(config-if)# spanning-tree vlan 1 port-priority 240
 
-
-
-
+### F0/1 still has a lower root cost then f0/2 so SW3 will not select a different root port. ###
 
 
 
 
 
 !! Configure PortFast and BPDU guard on the F0/3 interfaces of SW3/SW4 !!
+
+SW3(config-if)#spanning-tree portfast 
+SW3(config-if)#spanning-tree bpduguard enable
+
+same thing for SW4
+
 
 
 
