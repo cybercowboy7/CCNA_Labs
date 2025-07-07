@@ -27,3 +27,59 @@ DSW2(config)# int range g1/0/3 - 4
 DSW2(config-if-range)# channel-group 1 mode desirable
 DSW2(config-if-range)# int po1
 DSW2(config-if)# switchport mode trunk
+
+
+!! Configure Layer 3 EtherChannel between DSW1 and DSW2 using static EtherChannel. !!
+
+DSW1# config t
+DSW1(config)# int range g1/0/1 - 2
+DSW1(config-if-range)# no switchport  
+DSW1(config-if-range)# channel-group 2 mode on
+DSW1(config-if-range)# int po2
+DSW1(config-if)# ip address 10.0.0.1 255.255.255.252
+
+
+DSW2# config t
+DSW2(config)# int range g1/0/1 - 2
+DSW2(config-if-range)# no switchport  
+DSW2(config-if-range)# channel-group 2 mode on
+DSW2(config-if-range)# int po2
+DSW2(config-if)# ip address 10.0.0.2 255.255.255.252
+
+
+!! Configure routes to allow the PCs to reach SRV1. !!
+
+DSW1(config) ip routing
+DSW1(config) ip route 172.16.2.0 255.255.255.0 10.0.0.2
+
+### Do the same for DSW2 ###
+
+!!  What is the default EtherChannel load-balancing method used on each switch? !!
+
+ASW1# show etherchannel load-balancing
+
+!! Configure the switches to load-balance based on source and destination IP addresses. !!
+
+ASW1(config)# port-channel load-balance src-dst-ip
+ASW1(config)# do show etherchannel load-balance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
