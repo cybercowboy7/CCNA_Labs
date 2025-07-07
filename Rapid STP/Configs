@@ -1,0 +1,47 @@
+!! Which switch is the root bridge? What appears different than what you have learned about the root bridge? What is the cause of this? !!
+
+SW1# show spanning-tree
+
+### The output shows that SW1 is the root bridge ###
+### It seems that there is a blocking port on the root bridge which is different then all designated ports on the root bridge ###
+### The cause of this must be the Hub attached between SW1 and SW3. There is only a need for 1 designated port per collision domain. ###
+
+!! Determine the port role/state of each remaining switch interface !!
+
+SW2:
+  - F0/1: R
+  - G0/1: Alt/Discarding
+  - F0/2: D
+
+SW3:
+  - F0/2: R
+  - G0/1: D
+  - F0/1: D
+
+SW4:
+  - F0/2: Alt/Discarding
+  - F0/1: R
+
+
+
+!! Manually configure the appropriate RSTP link type on each interface. What do you think is the correct link type for SW1s F0/24? !!
+
+SW1(config) int f0/24
+SW1(config-if) spanning-tree link-type shared
+SW1(config-if) int f0/1
+SW1(config-if) spanning-tree link-type point-to-point
+SW1(config-if) int f0/2
+SW1(config-if) spanning-tree link-type shared
+SW1(config-if) int f0/3
+SW1(config-if) spanning-tree link-type shared
+
+### Do the rest of the switches in the same fashion as the first switch. ###
+
+
+
+
+
+
+
+
+    
