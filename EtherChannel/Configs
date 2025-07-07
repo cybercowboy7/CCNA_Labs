@@ -1,0 +1,29 @@
+!! Configure Layer 2 EtherChannel between ASW1 and DSW1 using LACP. Configure it as a trunk !!
+
+ASW1# config t
+ASW1(config)# int range g0/1 - 2
+ASW1(config-if-range)# channel-group 1 mode active
+ASW1(config-if-range)# int po1
+ASW1(config-if)# switchport mode trunk
+
+
+DSW1# config t
+DSW1(config)# int range g1/0/3 - 4
+DSW1(config-if-range)# channel-group 1 mode active
+DSW1(config-if-range)# int po1
+DSW1(config-if)# switchport mode trunk
+
+
+!! Configure Layer 2 EtherChannel between ASW2 and DSW2 using PAgP. Configure it as a trunk !!
+
+ASW2# config t
+ASW2(config)# int range g0/1 - 2
+ASW2(config-if-range)# channel-group 1 mode desirable
+ASW2(config-if-range)# int po1
+ASW2(config-if)# switchport mode trunk
+
+DSW2# config t
+DSW2(config)# int range g1/0/3 - 4
+DSW2(config-if-range)# channel-group 1 mode desirable
+DSW2(config-if-range)# int po1
+DSW2(config-if)# switchport mode trunk
