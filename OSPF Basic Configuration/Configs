@@ -44,6 +44,7 @@ R1(config-router)#default-information originate
 !! Check the routing tables of R2, R3, and R4. What default routes were added? !!
 
 ### Router 2 and Router 3 both have one default route to the internet while Router 4 has two equal cost routes to the internet in their routing tables ###
+### R4 load unequal balances because ?????? ###
 
 
 
