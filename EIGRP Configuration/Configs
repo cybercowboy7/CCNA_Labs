@@ -30,8 +30,15 @@ R1(config-router)#passive-interface loopback 0
 
 ### Complete on all other routers. Make sure any interfaces not connected to another EIGRP router are passive as well as the loopbacks. ###
 
+R1# show ip eigrp neighbors
+R1# show ip route eigrp
+R1# show ip route eigrp topology
 
-!! Configure R1 to perform unequal-cost load-balancing when sending network traffic to 192.168.1.0/24. !!
+!! Configure R1 to perform unequal-cost load-balancing when sending network traffic to 192.168.4.0/24. !!
+
+R1(config)#route eigrp 100
+R1(config-router)#variance 2
+R1#show ip route eigrp
 
 
 
