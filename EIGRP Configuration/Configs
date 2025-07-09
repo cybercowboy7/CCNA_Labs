@@ -1,0 +1,41 @@
+!! Configure the appropriate hostnames and IP address one each device. Enable router interfaces !!
+
+router> enable
+router# config t
+router(config)# hostname R1
+R1(config)# int g0/0
+R1(config-if)# ip address 10.0.12.1 255.255.255.252
+R1(config-if)# no shut
+
+REPEAT FOR ALL INTERFACES AND ALL DEVICES.
+
+
+
+!! Configure a loopback interface on each router (1.1.1.1/32 for R1, 2.2.2.2/32 for R2, etc) !!
+
+R1(config)# interface loopback 0
+R1(config-if)# ip address 1.1.1.1 255.255.255.255
+R1(config-if)# no shut
+
+SAME FOR OTHER ROUTERS
+
+
+!! Configure EIGRP on each router. Disable auto-summery. Enabled EIGRP on each interface including loopbacks. Configure passive interfaces !!
+
+R1(config)#router eigrp 100
+R1(config-router)#no auto-summary
+R1(config-router)#network 0.0.0.0 255.255.255.255
+### Be more precise on which interfaces will have EIGRP enabled in production networks ###
+R1(config-router)#passive-interface loopback 0
+
+### Complete on all other routers. Make sure any interfaces not connected to another EIGRP router are passive as well as the loopbacks. ###
+
+
+!! Configure R1 to perform unequal-cost load-balancing when sending network traffic to 192.168.1.0/24. !!
+
+
+
+
+
+
+
