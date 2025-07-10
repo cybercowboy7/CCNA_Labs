@@ -1,0 +1,56 @@
+The network has been pre-configured (IP addresses, OSPF)
+
+1. The connection between R1 and R2 has been newly added.
+  -Configure the serial connection between R1 and R2 (clock rate of 128000).
+  -Configure OSPF on R1 and R2.
+
+R1#config t
+R1(config)# int s0/0/0
+R1(config-if)# clock rate 128000
+
+R1(config)# int s0/0/0
+R1(config-if)#ip ospf 1 area 0
+R1(config-if)#ip ospf network point-to-point 
+
+### I also configured IP addresses for the serial interfaces because it seems there was no IP addresses for those interfaces causing the links to be down ###
+
+
+2. Only R3 has a route to 10.0.2.0/24.  Why?  Fix the problem.
+
+R3(config)#int g0/1
+R3(config-if)#no ip ospf network point-to-point
+
+### Router 3 G0/1 interface was in point-to-point network mode. disabled ###
+
+
+3. R2 and R4 won't become OSPF neighbors with R5.  Why?  Fix the problem.
+
+First, I checked all interfaces in the same subnet on Routers 2 and 4.
+R2#show ip ospf int g0/0
+
+### It shows that the Hello timer and dead timer are 10 and 40 while router 5 is set to 5 and 20 ###
+### changed it on router 5 to match ###
+
+R5(config)#int g0/0
+R5(config-if)#ip ospf hello-interval 10
+R5(config-if)#ip ospf dead-interval 40
+
+
+4. PC1 and PC2 can't ping the external server 8.8.8.8.  Why?  Fix the problem.
+
+Router 5 did was not advertising its default route to the ISP router.
+
+R5(config)#ip route 0.0.0.0 0.0.0.0 203.0.113.2 
+R5(config)#router ospf 1
+R5(config-router)#default-information originate
+
+
+
+5. Examine the LSDB.  What LSAs are present?
+
+R1# show ip ospf database
+
+
+
+
+
