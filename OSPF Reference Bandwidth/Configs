@@ -1,0 +1,76 @@
+1. Configure the appropriate hostnames and IP addresses on each device.  Enable router interfaces.
+    (You don't have to configure ISPR1)
+
+### Self-Explanatory ###
+
+
+2. Configure a loopback interface on each router (1.1.1.1/32 for R1, 2.2.2.2/32 for R2, etc.)
+
+### Self-Explanatory ###
+
+
+
+3. Enable OSPF directly on each interface of the routers.
+    Configure passive interfaces as appropriate.
+
+R1(config)#router ospf 1
+R1(config-router)#passive-interface default
+R1(config-router)#no passive-interface f1/0
+R1(config-router)#no passive-interface g0/0
+
+R1(config)# int f1/0
+R1(config-if)# ip ospf 1 area 0
+R1(config-if)# int g0/0
+R1(config-if)# ip ospf 1 area 0
+
+### Repeat for all other routers ###
+
+
+
+4. Configure the reference bandwidth on each router so a FastEthernet interface
+    has a cost of 100.
+
+R1(config-router)# auto-cost reference-bandwidth 10000
+R1# show ip route ospf
+
+### Repeat for all routers###
+
+
+
+5. Configure R1 as an ASBR that advertises a default route in to the OSPF domain.
+
+R1(config)#ip route 0.0.0.0 0.0.0.0 203.0.113.2
+R1(config)#router ospf 1
+R1(config-router)#default-information originate
+
+
+
+
+6. Check the routing tables of R4.  What default route(s) were added?
+    (watch the video for a brief explanation)
+
+R4# show ip route
+
+### this shows that there is only one route via R2.
+
+
+
+
+7. Use Simulation mode to view the OSPF Hello messages being sent by the routers.
+    What fields are included in the Hello message?
+
+### Source IP address of the advertised network, Destination multicast IP address ###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
