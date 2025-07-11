@@ -1,0 +1,52 @@
+1. Ping external server 8.8.8.8 from PC1/PC2.
+    What is the default gateway configured as?
+
+  ### Issued the "tracert 8.8.8.8" command on the PCs and it looks like R1 is the default gateway configured currently. ###
+
+
+  
+
+2. Configure HSRPv2 on R1/R2.
+    Raise R1's priority above the default, lower R2's priority below the default.
+    Enable preemption.
+
+R1# config t
+R1(config)# int g0/0
+R1(config-if) standby 1 ip 10.0.1.254
+
+R2(config)# int g0/0
+R2(config-if) standby 1 ip 10.0.1.254
+
+R1(config-if)#standby 1 priority 200
+R2(config-if)#standby 1 priority 50
+
+  
+
+3. Configure the VIP as the default gateway of PC1/PC2.
+    Ping 8.8.8.8 from the PCs.  Check the PCs' ARP table.
+    What MAC address is mapped to the VIP?
+
+### The MAC address is the Virtual MAC address along with the VIP ###
+
+
+  
+
+4. Turn off R1 (save the config first!).
+    After it restarts, ping from PC1 to 8.8.8.8 again.
+    Is R2 used as the default gateway?
+
+### It does use R2 as the default gateway ###
+
+  
+
+5. Turn on R1 again.  
+    Does it become the active router again?
+
+### Yes it does become the active router again ###
+
+
+
+
+
+
+
