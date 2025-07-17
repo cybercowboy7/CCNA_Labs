@@ -1,0 +1,30 @@
+1. Configure extended ACLS to fulfill the following network policies:
+      -Hosts in 172.16.2.0/24 can't communicate with PC1.
+
+R1(config)#ip access-list extended DENY_TO_172.16.1.1
+R1(config-ext-nacl)#deny ip 172.16.2.0 0.0.0.255 host 172.16.1.1
+R1(config-ext-nacl)#permit ip any any
+R1(config-ext-nacl)#int g0/1
+R1(config-if)#ip access-group DENY_TO_172.16.1.1 in
+
+
+
+
+
+      -Hosts in 172.16.1.0/24 can't access the DNS service on SRV1.
+
+R1(config)#ip access-list extended DENY_DNS_SRV1
+R1(config-ext-nacl)#deny tcp 172.16.1.0 0.0.0.255 host 192.168.1.100 eq 53
+R1(config-ext-nacl)#deny udp 172.16.1.0 0.0.0.255 host 192.168.1.100 eq 53
+R1(config-ext-nacl)#permit ip any any
+R1(config-if)#ip access-group DENY_DNS_SRV1 in
+
+
+
+      -Hosts in 172.16.2.0/24 can't access the HTTP or HTTPS services on SRV2.
+
+R2(config)#ip access-list extended DENY_WEB_172.16.2.0
+R2(config-ext-nacl)#deny tcp 172.16.2.0 0.0.0.255 host 192.168.2.100 eq 80
+R2(config-ext-nacl)#deny tcp 172.16.2.0 0.0.0.255 host 192.168.2.100 eq 443
+R2(config-ext-nacl)#permit ip any any
+R2(config-if)#ip access-group DENY_WEB_172.16.2.0 in
