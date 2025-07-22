@@ -1,0 +1,69 @@
+ROUTING HAS BEEN PRECONFIGURED
+(default route on R1, OSPF on all routers with 'network 0.0.0.0 255.255.255.255 area 0')
+
+1. Configure the software clock on R1, R2, and R3 to 12:00:00 Dec 30 2020 (UTC).
+
+R1#clock set 12:00:00 30 December 2020
+
+R2#clock set 12:00:00 30 December 2020
+
+R3#clock set 12:00:00 30 December 2020
+
+
+
+
+2. Configure the time zone of R1, R2, and R3 to match your own.
+
+R1(config)#clock timezone EST -5 
+
+R2(config)#clock timezone EST -5 
+
+R3(config)#clock timezone EST -5 
+
+
+
+3. Configure R1 to synchronize to NTP server 1.1.1.1 over the Internet.
+    What stratum is 1.1.1.1?  What stratum is R1?
+
+R1(config)#ntp server 1.1.1.1 
+R1#show ntp associations
+
+### 1.1.1.1 is stratum 0 and R1 is stratum 1 ###
+
+
+
+
+4. Configure R1 as a stratum 8 NTP master.
+    Synchronize R2 and R3 to R1 with authentication.
+   *the 'ntp source' command is not available in Packet Tracer, so just use 
+    the physical interface IP addresses of R1.
+
+R1(config)#ntp master
+R1(config)#ntp authenticate
+R1(config)#ntp authentication-key 1 md5 test
+R1(config)#ntp trusted-key 1
+
+R2(config)#ntp authenticate 
+R2(config)#ntp authentication-key 1 md5 test
+R2(config)#ntp trusted-key 1
+R2(config)#ntp server 192.168.12.1 key 1
+
+R3(config)#ntp authenticate 
+R3(config)#ntp authentication-key 1 md5 test
+R3(config)#ntp trusted-key 1
+R3(config)#ntp server 192.168.13.1 key 1
+
+
+
+5. Configure NTP to update the hardware calendars of R1, R2, and R3.
+  *you can't view the calendar in Packet Tracer
+
+R1(config)#ntp update-calendar 
+
+R2(config)#ntp update-calendar 
+
+R3(config)#ntp update-calendar 
+
+
+
+
