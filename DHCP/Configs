@@ -1,0 +1,73 @@
+1. Configure the following DHCP pools on R2:
+POOL1: 192.168.1.0/24 (reserve .1 to .10)
+     DNS 8.8.8.8
+     Domain: jeremysitlab.com
+     Default Gateway: R1
+POOL2: 192.168.2.0/24 (reserve .1 to .10)
+     DNS 8.8.8.8
+     Domain: jeremysitlab.com
+     Default Gateway: R2
+POOL3: 203.0.113.0/30 (reserve .1)
+
+
+R2(config)#ip dhcp excluded-address 192.168.1.1 192.168.1.10
+R2(config)#ip dhcp pool POOL1
+R2(dhcp-config)#network 192.168.1.0 255.255.255.0
+R2(dhcp-config)#dns 8.8.8.8 
+R2(dhcp-config)#domain-name jeremysitlab.com
+R2(dhcp-config)#default-router 192.168.1.1
+
+R2(config)#ip dhcp excluded-address 192.168.2.1 192.168.2.10
+R2(config)#ip dhcp pool POOL2
+R2(dhcp-config)#network 192.168.1.0 255.255.255.0
+R2(dhcp-config)#dns 8.8.8.8 
+R2(dhcp-config)#domain-name jeremysitlab.com
+R2(dhcp-config)#default-router 192.168.2.1
+
+R2(config)#ip dhcp excluded-address 203.0.113.1
+R2(config)#ip dhcp pool POOL3
+R2(dhcp-config)#network 203.0.113.0 255.255.255.254
+
+
+
+2. Configure R1's G0/0 interface as a DHCP client.
+    What IP address did it configure?
+
+R1(config)#int g0/0
+R1(config-if)#ip address dhcp
+
+### It configured 203.0.113.2 ###
+
+
+
+
+
+
+
+3. Configure R1 as a DHCP relay agent for the 192.168.1.0/24 subnet.
+
+R1(conf-if) ip helper-address 203.0.113.1
+
+
+
+
+
+ 
+4. Use the CLI of PC1 and PC2 to make them request an IP address 
+    from their DHCP server.
+
+ipconfig /release
+ipconfig /renew
+
+
+
+
+
+
+
+
+
+
+
+
+
