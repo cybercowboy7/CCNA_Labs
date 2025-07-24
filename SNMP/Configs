@@ -1,0 +1,37 @@
+## SNMP functionality is VERY limited in Packet Tracer! ##
+
+1. Configure the following SNMP communities on R1:
+read-only: Cisco1
+read/write: Cisco2
+
+R1(config)#snmp-server community Cisco1 ro
+R1(config)#snmp-server community Cisco2 rw
+
+
+
+
+2. Use SNMP 'Get' messages via the MIB browser on PC1 to check the following:
+-How long has R1 been running? (system uptime)
+-What is the currently configured hostname on R1?
+-How many interfaces does R1 have?
+-What are those interfaces?
+
+### For first question: go into PC1 MIB browser and fillout the IP of R1, select the appropriate MIB in the lefthand menu (system uptime), make sure it is a 
+Get message, and hit go. You should see a system uptime of 10 hours and 5 minutes ###
+
+### The configured hostname is R1 ###
+
+### The router has 4 interfaces ###
+
+### VLAN1, g0/0, g0/1, g0/2 ###
+
++check what other information you can learn about R1 via SNMP Get messages.
+ 
+3. Use an SNMP 'Set' message from PC1 to change the hostname of R1.
+
+### Changed the type of message to set, changed the DataType to a string since we are inputting characters for the new hostname. Hit send and verify in CLI of R1 ###
+
+
+
+
+  
