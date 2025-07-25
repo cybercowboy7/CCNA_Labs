@@ -1,0 +1,69 @@
+*SW2 has been newly added to the network, but has not yet been configured.  
+1.Connect Laptop1 to SW2's console port to perform the following configurations:
+Host name: SW2
+Enable secret: ccna
+Username/PW: jeremy/ccna
+VLAN1 SVI: 192.168.2.253/24
+Default gateway: R2
+
+
+Switch(config)#hostname SW2
+SW2(config)#enable secret ccna
+SW2(config)#username jeremy password ccna
+SW2(config)#int vlan 1
+SW2(config-if)#ip address 192.168.2.253 255.255.255.0
+SW2(config-if)#no shut
+SW2(config)#ip default-gateway 192.168.2.254
+
+
+
+
+
+2. Configure the following console line security settings on SW2:
+Authentication: Local user
+Exec timeout: 5 minutes
+
+
+SW2(config)#line console 0
+SW2(config-line)#login local
+SW2(config-line)#exec-timeout 5 0
+
+
+
+
+
+
+
+3. Configure SW2 for remote access via SSH:
+Domain name: jeremysitlab.com
+RSA key size: 2048 bits
+Authentication: Local user
+Exec timeout: 5 minutes
+Protocols: SSH only
++Limit access to PC1 ONLY
+
+
+SW2(config)#ip domain name jeremysitlab.com
+SW2(config)#crypto key generate rsa
+SW2(config)#line vty 0 15
+SW2(config-line)#login local
+SW2(config-line)#exec-timeout 5 0
+SW2(config-line)#transport input ssh
+SW2(config)#access-list 1 permit host 192.168.1.1
+SW2(config-line)#access-class 1 in 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
