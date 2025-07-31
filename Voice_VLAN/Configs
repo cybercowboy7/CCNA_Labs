@@ -1,0 +1,10 @@
+**Telephony configurations (not relevant to the CCNA) have been pre-configured on R1**
+1. Configure SW1's interfaces in the appropriate VLANs.
+
+2. Configure ROAS for the connection between SW1 and R1.
+
+3. In simulation mode, ping PC2 from PC1.
+    Is the traffic tagged with a VLAN ID?
+
+*WATCH THE VIDEO TO LEARN HOW TO DO STEP 4*
+4. In simulation mode, call PH1 from PH2.  Is the traffic tagged with a VLAN ID?
