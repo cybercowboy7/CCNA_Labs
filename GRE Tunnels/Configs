@@ -1,0 +1,42 @@
+
+1. Configure a GRE tunnel to connect R1 and R2.
+
+R1(config)#int tunnel 0
+R1(config-if)#tunnel source g0/0/0
+R1(config-if)#tunnel destination 200.0.0.2
+R1(config-if)#ip address 192.168.1.1 255.255.255.252
+
+R2(config)#int tunnel 0
+R2(config-if)#tunnel source g0/0/0
+R2(config-if)#tunnel destination 100.0.0.2
+R2(config-if)#ip address 192.168.1.2 255.255.255.252
+
+R1(config)#ip route 0.0.0.0 0.0.0.0 100.0.0.1
+R2(config)#ip route 0.0.0.0 0.0.0.0 200.0.0.1
+
+
+
+
+2. Configure OSPF on the tunnel interfaces of R1 and R2,
+    to allow PC1 and PC2 to communicate.
+
+R1(config)#router ospf 1
+R1(config-router)#network 192.168.1.0 255.255.255.252 area 0
+R1(config-router)#network 10.0.1.0 0.0.0.255 area 0
+R1(config-router)#passive-interface GigabitEthernet0/0/0
+
+R2(config)#router ospf 1
+R2(config-router)#network 192.168.1.0 255.255.255.252 area 0
+R2(config-router)#network 10.0.2.0 0.0.0.255 area 0
+R2(config-router)#passive-interface GigabitEthernet0/0/0
+
+
+
+
+
+
+
+
+
+
+
