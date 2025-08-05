@@ -1,0 +1,45 @@
+1. Use the web browser on PC1 to access the GUI of WLC1.
+Username: admin
+Password: Cisco123
+   *you must use HTTPS
+
+
+### Self-Explanatory ###
+
+
+
+2. Spend some time familiarizing yourself with the WLC GUI.
+    What information can be viewed from each tab?
+    What is the current state of the network?
+
+### Self-explanatory ###
+
+
+
+
+
+
+
+3. Configure dynamic interfaces for the Internal & Guest WLANs.
+
+
+
+
+
+
+
+4. Create the Internal & Guest WLANs using WPA2+PSK.
+
+
+
+
+
+
+5. Add a wireless client to the network and associate it with an AP.
+
+
+
+
+
+
+
