@@ -1,0 +1,19 @@
+1. Configure the appropriate hostname on each router/switch.
+
+hostname <hostname>
+
+2. Configure the enable secret jeremysitlab on each router/switch. Use type 9 hashing if available; otherwise, use type 5.
+
+enable secret jeremysitlab
+
+3. Configure the user account cisco with secret ccna on each router/switch. Use type 9 hashing if available; otherwise, use type 5.
+
+username cisco secret ccna
+
+4. Configure the console line to require login with a local user account. Set a 30-minute inactivity timeout. Enable synchronous logging.
+
+ASW-A1(config)#line console 0
+ASW-A1(config-line)#login local
+ASW-A1(config-line)#exec-timeout 30
+ASW-A1(config-line)#logging synchronous 
+
