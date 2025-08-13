@@ -14,6 +14,8 @@ to form an EtherChannel.
 
 DSW-A1(config)#int port-channel 1
 DSW-A1(config-if)#switchport mode trunk
+DSW-B1(config)#int range GigabitEthernet1/0/4-5
+DSW-B1(config-if-range)#channel-group 1 mode active
 
 
 
@@ -73,6 +75,8 @@ ASW-A1(config-if-range)#switchport trunk native vlan 1000
 
 
 
+
+
     c. In Office A, allow VLANs 10, 20, 40, and 99 on all trunks.
 
 ASW-A1(config)#int range g0/1-2
@@ -80,7 +84,15 @@ ASW-A1(config-if-range)#switchport trunk allowed vlan 10,20,40,99
 
 (repeat on all trunk ports)
 
+
+
+
     d. In Office B, allow VLANs 10, 20, 30, and 99 on all trunks.
+
+ASW-B1(config)#int range g0/1-2
+ASW-B1(config-if-range)#switchport trunk allowed vlan 10,20,30,99
+
+(repeat on all trunk ports)
 
 
 
