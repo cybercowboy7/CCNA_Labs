@@ -98,6 +98,12 @@ ASW-B1(config-if-range)#switchport trunk allowed vlan 10,20,30,99
 
 
 4. Configure one of each office’s Distribution switches as a VTPv2 server. Use domain name JeremysITLab.
+
+DSW-A1(config)#vtp mode server
+DSW-A1(config)#vtp domain JeremeysITLab
+
+
+
     a. Verify that other switches join the domain.
 
   
